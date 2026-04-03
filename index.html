@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIDDHARTH SINGH — CS Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#04060f;--bg2:#070b1a;--primary:#00d4ff;--accent:#ff3c6e;--gold:#ffd700;--purple:#9b5de5;--green:#00ff88;--text:#e0eaff;--muted:#6a7fa8;--card:rgba(0,212,255,0.04);--card-border:rgba(0,212,255,0.15);--glow:0 0 20px rgba(0,212,255,0.4);--glow-red:0 0 20px rgba(255,60,110,0.5);--glow-gold:0 0 20px rgba(255,215,0,0.5);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;overflow-x:hidden;cursor:none;}
+#cursor{position:fixed;width:12px;height:12px;background:var(--primary);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,background 0.2s;box-shadow:0 0 12px var(--primary);}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,212,255,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;}
+#stars-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(4,6,15,0.95),transparent);backdrop-filter:blur(4px);}
+.nav-logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;color:var(--primary);letter-spacing:0.2em;text-shadow:var(--glow);}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;transition:color 0.3s;font-family:'Orbitron',sans-serif;}
+.nav-links a:hover{color:var(--primary);text-shadow:var(--glow);}
+section{position:relative;z-index:1;}
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;overflow:hidden;}
+.hero-bg-ring{position:absolute;border-radius:50%;border:1px solid rgba(0,212,255,0.08);animation:spin-slow linear infinite;}
+.hero-bg-ring:nth-child(1){width:500px;height:500px;animation-duration:40s;}
+.hero-bg-ring:nth-child(2){width:800px;height:800px;animation-duration:65s;animation-direction:reverse;border-color:rgba(155,93,229,0.06);}
+.hero-bg-ring:nth-child(3){width:1100px;height:1100px;animation-duration:90s;border-color:rgba(255,60,110,0.04);}
+@keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.hero-content{position:relative;z-index:2;}
+.hero-badge{display:inline-block;border:1px solid var(--primary);color:var(--primary);font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.22em;padding:0.4rem 1.2rem;border-radius:2px;margin-bottom:2rem;text-transform:uppercase;animation:badge-pulse 3s ease-in-out infinite;}
+@keyframes badge-pulse{0%,100%{box-shadow:var(--glow);}50%{box-shadow:0 0 35px rgba(0,212,255,0.7);}}
+.hero-name{font-family:'Orbitron',sans-serif;font-size:clamp(2.4rem,6.5vw,5.5rem);font-weight:900;line-height:1;margin-bottom:0.5rem;background:linear-gradient(135deg,#fff 30%,var(--primary) 70%,var(--purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:name-appear 1s ease forwards;}
+@keyframes name-appear{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.hero-alias{font-family:'Orbitron',sans-serif;font-size:clamp(0.75rem,2vw,1.1rem);color:var(--accent);letter-spacing:0.35em;text-shadow:var(--glow-red);margin-bottom:1.5rem;animation:alias-appear 1s 0.3s ease both;}
+@keyframes alias-appear{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-desc{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.8;font-style:italic;animation:alias-appear 1s 0.6s ease both;}
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-bottom:3rem;animation:alias-appear 1s 0.8s ease both;}
+.hero-stat{text-align:center;}
+.hero-stat-val{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:700;color:var(--primary);}
+.hero-stat-lbl{font-size:0.6rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;}
+.cta-row{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;animation:alias-appear 1s 1s ease both;}
+.btn{font-family:'Orbitron',sans-serif;font-size:0.68rem;letter-spacing:0.2em;padding:0.85rem 2.2rem;border:none;cursor:pointer;text-decoration:none;transition:all 0.3s;position:relative;overflow:hidden;text-transform:uppercase;font-weight:700;}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:left 0.4s;}
+.btn:hover::before{left:100%;}
+.btn-primary{background:var(--primary);color:var(--bg);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-primary:hover{background:#fff;box-shadow:var(--glow);}
+.btn-outline{background:transparent;color:var(--primary);border:1px solid var(--primary);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-outline:hover{background:rgba(0,212,255,0.1);box-shadow:var(--glow);}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.4rem;animation:float-anim 2s ease-in-out infinite;opacity:0.5;}
+.scroll-indicator span{font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.scroll-indicator .arrow{width:1px;height:40px;background:linear-gradient(to bottom,var(--primary),transparent);}
+@keyframes float-anim{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+.section-head{text-align:center;padding:5rem 2rem 3rem;}
+.section-tag{font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.35em;color:var(--primary);text-transform:uppercase;margin-bottom:0.8rem;}
+.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#fff;}
+.section-title span{color:var(--accent);}
+.section-line{width:60px;height:2px;background:linear-gradient(to right,var(--primary),var(--accent));margin:1.2rem auto 0;}
+
+/* ABOUT */
+#about{padding:2rem 3rem 6rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:center;}
+.about-visual{position:relative;display:flex;align-items:center;justify-content:center;}
+.about-hex{width:260px;height:260px;background:linear-gradient(135deg,#070d22,#0d1a3a);clip-path:polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);display:flex;align-items:center;justify-content:center;position:relative;animation:hex-pulse 4s ease-in-out infinite;}
+@keyframes hex-pulse{0%,100%{filter:drop-shadow(0 0 15px rgba(0,212,255,0.3));}50%{filter:drop-shadow(0 0 40px rgba(0,212,255,0.7));}}
+.about-hex-border{position:absolute;width:285px;height:285px;clip-path:polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);background:linear-gradient(135deg,var(--primary),var(--purple),var(--accent));z-index:-1;animation:border-spin 6s linear infinite;}
+@keyframes border-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.orbit-container{position:absolute;width:320px;height:320px;animation:orbit-spin 12s linear infinite;}
+@keyframes orbit-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:var(--glow);}
+.orbit-dot:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
+.orbit-dot:nth-child(2){bottom:0;left:50%;transform:translateX(-50%);background:var(--accent);box-shadow:var(--glow-red);}
+.orbit-dot:nth-child(3){left:0;top:50%;transform:translateY(-50%);background:var(--purple);}
+.coder-svg{width:140px;height:140px;}
+.about-text h3{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--primary);margin-bottom:1rem;}
+.about-text p{color:var(--muted);line-height:1.9;margin-bottom:1rem;font-size:0.92rem;}
+.powers-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-top:1.5rem;}
+.power-chip{padding:0.55rem 1rem;border:1px solid var(--card-border);background:var(--card);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;color:var(--text);display:flex;align-items:center;gap:0.5rem;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));}
+.power-chip:hover{border-color:var(--primary);background:rgba(0,212,255,0.08);transform:translateX(4px);}
+.power-chip span{color:var(--primary);}
+
+/* SKILLS */
+#skills{padding:0 3rem 6rem;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto;}
+.skill-card{padding:2rem;background:var(--card);border:1px solid var(--card-border);position:relative;overflow:hidden;transition:all 0.4s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));}
+.skill-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(to right,var(--primary),var(--purple));transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.skill-card:hover{border-color:rgba(0,212,255,0.4);transform:translateY(-4px);box-shadow:var(--glow);}
+.skill-card:hover::after{transform:scaleX(1);}
+.skill-icon{font-size:2rem;margin-bottom:1rem;}
+.skill-name{font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;color:#fff;letter-spacing:0.1em;margin-bottom:1.2rem;}
+.skill-bar-wrap{display:flex;flex-direction:column;gap:0.7rem;}
+.skill-label{display:flex;justify-content:space-between;font-size:0.7rem;color:var(--muted);margin-bottom:0.3rem;}
+.skill-track{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.skill-fill{height:100%;background:linear-gradient(to right,var(--primary),var(--purple));border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(0.25,1,0.5,1);}
+.skill-fill.animate{transform:scaleX(1);}
+
+/* ══════════════════════════════════════
+   CODING STATS SECTION
+══════════════════════════════════════ */
+#coding-stats{padding:0 3rem 6rem;}
+.stats-header-row{display:flex;align-items:flex-end;justify-content:space-between;max-width:1100px;margin:0 auto 2rem;}
+.stats-config-btn{font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.15em;padding:0.55rem 1.2rem;background:transparent;border:1px solid var(--card-border);color:var(--muted);cursor:pointer;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));}
+.stats-config-btn:hover{border-color:var(--primary);color:var(--primary);box-shadow:var(--glow);}
+.coding-platforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
+.platform-card{padding:1.5rem;border:1px solid var(--card-border);background:var(--card);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:all 0.3s;text-decoration:none;display:block;cursor:pointer;}
+.platform-card:hover{transform:translateY(-3px);}
+.platform-card.lc{border-color:rgba(255,161,22,0.3);}
+.platform-card.lc:hover{box-shadow:0 0 20px rgba(255,161,22,0.3);}
+.platform-card.gfg{border-color:rgba(47,141,70,0.3);}
+.platform-card.gfg:hover{box-shadow:0 0 20px rgba(47,141,70,0.3);}
+.platform-card.cf{border-color:rgba(24,144,255,0.3);}
+.platform-card.cf:hover{box-shadow:0 0 20px rgba(24,144,255,0.3);}
+.platform-card.cc{border-color:rgba(150,100,60,0.3);}
+.platform-card.cc:hover{box-shadow:0 0 20px rgba(150,100,60,0.3);}
+.platform-card.gh{border-color:rgba(200,200,200,0.2);}
+.platform-card.gh:hover{box-shadow:0 0 20px rgba(200,200,200,0.15);}
+.pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.pc-brand{display:flex;align-items:center;gap:0.5rem;}
+.pc-logo{font-size:1.3rem;}
+.pc-name{font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;}
+.pc-name.lc{color:#FFA116;}
+.pc-name.gfg{color:#2f8d46;}
+.pc-name.cf{color:#1890ff;}
+.pc-name.cc{color:#b07846;}
+.pc-name.gh{color:#c0c0c0;}
+.pc-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.1);border-top-color:var(--primary);border-radius:50%;animation:spin 0.7s linear infinite;display:none;}
+.pc-spinner.active{display:block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pc-solved{font-family:'Orbitron',sans-serif;font-size:2.6rem;font-weight:900;color:#fff;line-height:1;letter-spacing:0.03em;margin-bottom:0.3rem;}
+.pc-solved-lbl{font-size:0.6rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.8rem;}
+.pc-breakdown{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.pc-easy{background:rgba(0,184,163,0.12);color:#00b8a3;border:1px solid rgba(0,184,163,0.25);font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:2px;font-weight:600;}
+.pc-med{background:rgba(255,161,22,0.12);color:#FFA116;border:1px solid rgba(255,161,22,0.25);font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:2px;font-weight:600;}
+.pc-hard{background:rgba(255,60,110,0.12);color:var(--accent);border:1px solid rgba(255,60,110,0.25);font-size:0.6rem;padding:0.15rem 0.5rem;border-radius:2px;font-weight:600;}
+.pc-rating{font-size:0.72rem;color:var(--muted);margin-top:0.5rem;}
+.pc-rating strong{color:#fff;}
+.pc-username{font-size:0.62rem;color:var(--muted);margin-top:0.7rem;opacity:0.7;}
+.pc-err{font-size:0.65rem;color:rgba(255,60,110,0.7);margin-top:0.5rem;}
+.pc-placeholder{color:var(--muted);font-size:0.8rem;text-align:center;padding:1rem 0;}
+.stats-total-bar{max-width:1100px;margin:1.2rem auto 0;padding:1rem 1.5rem;background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(155,93,229,0.05));border:1px solid rgba(0,212,255,0.12);clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.stats-total-val{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:var(--primary);}
+.stats-total-lbl{font-size:0.62rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;}
+.stats-refresh-btn{margin-left:auto;font-family:'Orbitron',sans-serif;font-size:0.58rem;letter-spacing:0.12em;padding:0.45rem 1rem;background:transparent;border:1px solid var(--card-border);color:var(--muted);cursor:pointer;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));}
+.stats-refresh-btn:hover{border-color:var(--primary);color:var(--primary);}
+.stats-empty-prompt{max-width:1100px;margin:0 auto;padding:3rem;border:2px dashed rgba(0,212,255,0.15);text-align:center;cursor:pointer;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));}
+.stats-empty-prompt:hover{border-color:var(--primary);}
+.stats-empty-icon{font-size:2.5rem;margin-bottom:1rem;}
+.stats-empty-title{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:0.5rem;}
+.stats-empty-sub{font-size:0.78rem;color:var(--muted);opacity:0.6;}
+
+/* ACHIEVEMENTS */
+#achievements{padding:0 3rem 6rem;}
+.achieve-section-header{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 2rem;padding:0 0;}
+.achieve-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
+.achieve-card{padding:1.8rem;text-align:center;background:var(--card);border:1px solid var(--card-border);transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));position:relative;}
+.achieve-card:hover{border-color:var(--gold);box-shadow:var(--glow-gold);transform:translateY(-4px);}
+.achieve-icon{font-size:2rem;margin-bottom:0.8rem;}
+.achieve-title{font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;color:#fff;margin-bottom:0.5rem;letter-spacing:0.05em;}
+.achieve-sub{font-size:0.73rem;color:var(--muted);line-height:1.5;}
+.achieve-badge{display:inline-block;margin-top:0.7rem;font-family:'Orbitron',sans-serif;font-size:0.52rem;letter-spacing:0.2em;padding:0.25rem 0.7rem;border-radius:2px;background:rgba(255,215,0,0.1);color:var(--gold);border:1px solid rgba(255,215,0,0.3);}
+.achieve-edit-btns{position:absolute;top:0.5rem;right:0.5rem;display:flex;gap:0.3rem;opacity:0;transition:opacity 0.2s;}
+.achieve-card:hover .achieve-edit-btns{opacity:1;}
+.achieve-edit-btn{background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--muted);transition:color 0.2s;padding:0.15rem;}
+.achieve-edit-btn:hover{color:var(--primary);}
+.achieve-del-btn{background:none;border:none;cursor:pointer;font-size:0.75rem;color:rgba(255,60,110,0.5);transition:color 0.2s;padding:0.15rem;}
+.achieve-del-btn:hover{color:var(--accent);}
+.add-achieve-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px;border:2px dashed rgba(255,215,0,0.2);background:transparent;cursor:pointer;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));gap:0.6rem;color:var(--muted);font-family:'Orbitron',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;}
+.add-achieve-btn:hover{border-color:var(--gold);color:var(--gold);}
+.add-achieve-btn .plus{font-size:1.5rem;color:var(--gold);}
+
+/* PROJECTS */
+#projects{padding:0 3rem 6rem;}
+.projects-section-header{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto 2rem;}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.8rem;max-width:1200px;margin:0 auto;}
+.project-card{background:var(--card);border:1px solid var(--card-border);overflow:hidden;position:relative;transition:all 0.4s;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));}
+.project-card:hover{border-color:rgba(0,212,255,0.5);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.5),var(--glow);}
+.project-header{padding:1.8rem 1.8rem 1rem;display:flex;align-items:flex-start;justify-content:space-between;}
+.project-icon{font-size:2.2rem;}
+.project-status{font-family:'Orbitron',sans-serif;font-size:0.52rem;letter-spacing:0.2em;padding:0.3rem 0.8rem;border-radius:2px;}
+.status-active{background:rgba(0,212,255,0.1);color:var(--primary);border:1px solid rgba(0,212,255,0.3);}
+.status-complete{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.3);}
+.status-wip{background:rgba(255,215,0,0.1);color:var(--gold);border:1px solid rgba(255,215,0,0.3);}
+.project-body{padding:0 1.8rem 1.5rem;}
+.project-name{font-family:'Orbitron',sans-serif;font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.6rem;letter-spacing:0.05em;}
+.project-desc{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.project-tags{padding:1rem 1.8rem;display:flex;flex-wrap:wrap;gap:0.5rem;border-top:1px solid var(--card-border);}
+.tag{font-size:0.62rem;padding:0.25rem 0.7rem;background:rgba(155,93,229,0.1);color:var(--purple);border-radius:2px;letter-spacing:0.08em;font-weight:600;}
+.project-links{padding:0.8rem 1.8rem 1.5rem;display:flex;gap:1rem;justify-content:space-between;align-items:center;}
+.project-link{font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.15em;color:var(--primary);text-decoration:none;transition:all 0.3s;}
+.project-link:hover{text-shadow:var(--glow);}
+.project-action-btns{display:flex;gap:0.5rem;}
+.proj-edit-btn,.proj-del-btn{background:none;border:1px solid var(--card-border);cursor:pointer;font-size:0.6rem;padding:0.25rem 0.6rem;font-family:'Orbitron',sans-serif;letter-spacing:0.08em;transition:all 0.2s;}
+.proj-edit-btn{color:var(--muted);}
+.proj-edit-btn:hover{border-color:var(--primary);color:var(--primary);}
+.proj-del-btn{color:rgba(255,60,110,0.5);}
+.proj-del-btn:hover{border-color:var(--accent);color:var(--accent);}
+.add-project-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;border:2px dashed rgba(0,212,255,0.2);background:transparent;cursor:pointer;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));gap:1rem;color:var(--muted);font-family:'Orbitron',sans-serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;}
+.add-project-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(0,212,255,0.04);}
+.add-project-btn .plus{font-size:2rem;color:var(--primary);border:1px solid var(--primary);width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.3s;}
+.add-project-btn:hover .plus{box-shadow:var(--glow);}
+
+/* EXPERIENCE */
+#experience{padding:0 3rem 6rem;max-width:800px;margin:0 auto;}
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--primary),var(--purple),transparent);}
+.tl-item{position:relative;padding:0 0 3rem 2rem;}
+.tl-dot{position:absolute;left:-2.38rem;top:0.25rem;width:12px;height:12px;background:var(--primary);border-radius:50%;box-shadow:var(--glow);animation:dot-pulse 3s ease-in-out infinite;}
+.tl-dot.accent{background:var(--accent);box-shadow:var(--glow-red);}
+.tl-dot.gold{background:var(--gold);box-shadow:var(--glow-gold);}
+@keyframes dot-pulse{0%,100%{box-shadow:var(--glow);}50%{box-shadow:0 0 25px rgba(0,212,255,0.9);}}
+.tl-date{font-family:'Orbitron',sans-serif;font-size:0.58rem;color:var(--primary);letter-spacing:0.2em;margin-bottom:0.4rem;}
+.tl-role{font-family:'Orbitron',sans-serif;font-size:0.92rem;font-weight:700;color:#fff;margin-bottom:0.3rem;}
+.tl-org{font-size:0.85rem;color:var(--accent);margin-bottom:0.6rem;}
+.tl-desc{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+
+/* CONTACT */
+#contact{padding:0 3rem 8rem;max-width:700px;margin:0 auto;text-align:center;}
+.contact-card{background:var(--card);border:1px solid var(--card-border);padding:3.5rem;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));}
+.contact-card p{color:var(--muted);line-height:1.8;margin-bottom:2.5rem;}
+.social-links{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-top:2rem;}
+.social-link{display:flex;align-items:center;gap:0.5rem;font-family:'Orbitron',sans-serif;font-size:0.62rem;letter-spacing:0.15em;color:var(--muted);text-decoration:none;padding:0.7rem 1.4rem;border:1px solid var(--card-border);transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));}
+.social-link:hover{color:var(--primary);border-color:var(--primary);box-shadow:var(--glow);}
+footer{position:relative;z-index:1;text-align:center;padding:2rem;font-size:0.6rem;color:var(--muted);letter-spacing:0.15em;border-top:1px solid var(--card-border);font-family:'Orbitron',sans-serif;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);pointer-events:none;z-index:9000;}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ══ MODALS ══ */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,6,15,0.92);z-index:500;align-items:center;justify-content:center;padding:2rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:#080e24;border:1px solid var(--card-border);padding:2.5rem;width:100%;max-width:560px;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));animation:modal-in 0.3s ease;max-height:90vh;overflow-y:auto;}
+.modal.wide{max-width:680px;}
+@keyframes modal-in{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+.modal-title{font-family:'Orbitron',sans-serif;font-size:1.05rem;color:var(--primary);margin-bottom:2rem;letter-spacing:0.1em;}
+.form-group{margin-bottom:1.2rem;}
+.form-label{display:block;font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem;font-family:'Orbitron',sans-serif;}
+.form-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(0,212,255,0.15);color:var(--text);padding:0.75rem 1rem;font-family:'Exo 2',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.3s;}
+.form-input:focus{border-color:var(--primary);}
+.form-input option{background:#080e24;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.modal-actions{display:flex;gap:1rem;margin-top:2rem;justify-content:flex-end;}
+/* icon picker */
+.icon-picker{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.4rem;}
+.icon-opt{background:none;border:1px solid var(--card-border);font-size:1.3rem;padding:0.3rem 0.5rem;cursor:pointer;transition:all 0.2s;border-radius:2px;}
+.icon-opt.selected,.icon-opt:hover{border-color:var(--primary);background:rgba(0,212,255,0.08);}
+
+/* ══ TOAST ══ */
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:9000;background:#080e24;border:1px solid var(--card-border);border-left:3px solid var(--primary);padding:0.9rem 1.3rem;font-size:0.8rem;color:#fff;box-shadow:0 20px 40px rgba(0,0,0,0.8);min-width:220px;transform:translateX(120%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);font-family:'Orbitron',sans-serif;letter-spacing:0.08em;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.toast.show{transform:translateX(0);}
+.toast.success{border-left-color:var(--green);}
+.toast.error{border-left-color:var(--accent);}
+
+/* CONFIRM DIALOG */
+.confirm-modal{max-width:420px;}
+.confirm-msg{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem;}.nav-links{display:none;}
+  #about{grid-template-columns:1fr;padding:2rem 1.5rem;}
+  #skills,#projects,#experience,#contact,#achievements,#coding-stats{padding:0 1.5rem 4rem;}
+  .hero-stats{gap:1.5rem;}.powers-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .contact-card{padding:2rem;}
+  .stats-header-row,.projects-section-header,.achieve-section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="stars-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SID<span>.</span>DEV</div>
+  <ul class="nav-links">
+    <li><a href="#about">Origin</a></li>
+    <li><a href="#skills">Powers</a></li>
+    <li><a href="#coding-stats">Arena</a></li>
+    <li><a href="#achievements">Glory</a></li>
+    <li><a href="#projects">Missions</a></li>
+    <li><a href="#experience">Timeline</a></li>
+    <li><a href="#contact">Signal</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-ring"></div>
+  <div class="hero-bg-ring"></div>
+  <div class="hero-bg-ring"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⚡ M.Tech CSE · NSUT Delhi · Backend &amp; ML Engineer</div>
+    <h1 class="hero-name">SIDDHARTH SINGH</h1>
+    <div class="hero-alias">// THE CODE ARCHITECT //</div>
+    <p class="hero-desc">Forging scalable backends and intelligent algorithms at the intersection of system design and machine learning — one commit at a time.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="proj-count">0</div>
+        <div class="hero-stat-lbl">Missions</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" id="prob-count">0</div>
+        <div class="hero-stat-lbl">Problems Solved</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">GATE</div>
+        <div class="hero-stat-lbl">Qualified ×2</div>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">View Missions</a>
+      <a href="mailto:sidsingh1679@gmail.com" class="btn btn-outline">Open Channel</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span>Scroll</span><div class="arrow"></div></div>
+</section>
+
+<!-- ABOUT -->
+<div class="section-head reveal">
+  <div class="section-tag">// ORIGIN STORY</div>
+  <h2 class="section-title">Who is <span>Siddharth</span>?</h2>
+  <div class="section-line"></div>
+</div>
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="orbit-container"><div class="orbit-dot"></div><div class="orbit-dot"></div><div class="orbit-dot"></div></div>
+    <div class="about-hex-border"></div>
+    <div class="about-hex">
+      <svg class="coder-svg" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="28" width="104" height="68" rx="6" fill="#0a1628" stroke="#00d4ff" stroke-width="1.5"/>
+        <rect x="24" y="34" width="92" height="56" rx="3" fill="#050d1f"/>
+        <rect x="24" y="34" width="92" height="56" rx="3" fill="url(#sg)" opacity="0.35"/>
+        <rect x="30" y="43" width="38" height="3" rx="1.5" fill="#00d4ff" opacity="0.9"><animate attributeName="width" values="38;54;38" dur="2.5s" repeatCount="indefinite"/></rect>
+        <rect x="30" y="51" width="25" height="3" rx="1.5" fill="#9b5de5" opacity="0.8"><animate attributeName="width" values="25;40;25" dur="2s" repeatCount="indefinite"/></rect>
+        <rect x="34" y="59" width="48" height="3" rx="1.5" fill="#ff3c6e" opacity="0.7"><animate attributeName="width" values="48;33;48" dur="3s" repeatCount="indefinite"/></rect>
+        <rect x="34" y="67" width="30" height="3" rx="1.5" fill="#00d4ff" opacity="0.65"><animate attributeName="width" values="30;46;30" dur="1.8s" repeatCount="indefinite"/></rect>
+        <rect x="30" y="75" width="42" height="3" rx="1.5" fill="#9b5de5" opacity="0.7"><animate attributeName="width" values="42;26;42" dur="2.2s" repeatCount="indefinite"/></rect>
+        <rect x="80" y="43" width="2" height="10" rx="1" fill="#00d4ff"><animate attributeName="opacity" values="1;0;1" dur="0.85s" repeatCount="indefinite"/></rect>
+        <rect x="57" y="96" width="26" height="5" rx="2" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="46" y="101" width="48" height="4" rx="2" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="28" y="111" width="84" height="16" rx="3" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
+        <rect x="32" y="114" width="9" height="5" rx="1" fill="#111e38"/><rect x="43" y="114" width="9" height="5" rx="1" fill="#111e38"/>
+        <rect x="54" y="114" width="9" height="5" rx="1" fill="#111e38"/><rect x="65" y="114" width="9" height="5" rx="1" fill="#111e38"/>
+        <rect x="76" y="114" width="9" height="5" rx="1" fill="#111e38"/><rect x="87" y="114" width="17" height="5" rx="1" fill="#00d4ff" opacity="0.3"/>
+        <defs><linearGradient id="sg" x1="24" y1="34" x2="116" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#00d4ff" stop-opacity="0.3"/><stop offset="1" stop-color="#9b5de5" stop-opacity="0.1"/></linearGradient></defs>
+      </svg>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <h3>M.Tech CSE @ NSUT Delhi</h3>
+    <p>From debugging Django apps in Kanpur to architecting distributed systems in Delhi — I'm Siddharth Singh, a CS graduate student with a passion for scalable backends and models that learn.</p>
+    <p>B.Tech in Information Technology from UIET Kanpur (2024), now pursuing M.Tech in CSE at Netaji Subhas University of Technology. GATE qualified in both 2023 and 2025. AIR 5 in GFG Hiring Contest.</p>
+    <div class="powers-grid">
+      <div class="power-chip"><span>⚙️</span> Backend Dev</div>
+      <div class="power-chip"><span>🧠</span> Machine Learning</div>
+      <div class="power-chip"><span>🗄️</span> MongoDB · MySQL</div>
+      <div class="power-chip"><span>🔐</span> Auth &amp; Security</div>
+      <div class="power-chip"><span>📊</span> Data Analytics</div>
+      <div class="power-chip"><span>⚡</span> DSA · 450+ Solved</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="section-head reveal">
+  <div class="section-tag">// POWER ARSENAL</div>
+  <h2 class="section-title">Tech <span>Powers</span></h2>
+  <div class="section-line"></div>
+</div>
+<section id="skills">
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">💻</div><div class="skill-name">Languages</div>
+      <div class="skill-bar-wrap">
+        <div><div class="skill-label"><span>C++ (STL)</span><span>88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div><div class="skill-label"><span>JavaScript</span><span>85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div><div class="skill-label"><span>Python</span><span>82%</span></div><div class="skill-track"><div class="skill-fill" style="width:82%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚙️</div><div class="skill-name">Backend &amp; APIs</div>
+      <div class="skill-bar-wrap">
+        <div><div class="skill-label"><span>Node.js / Express</span><span>90%</span></div><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div><div class="skill-label"><span>Django</span><span>80%</span></div><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div><div class="skill-label"><span>REST APIs</span><span>88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div><div class="skill-label"><span>JWT / Auth</span><span>85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄️</div><div class="skill-name">Databases &amp; Tools</div>
+      <div class="skill-bar-wrap">
+        <div><div class="skill-label"><span>MongoDB</span><span>87%</span></div><div class="skill-track"><div class="skill-fill" style="width:87%"></div></div></div>
+        <div><div class="skill-label"><span>MySQL</span><span>80%</span></div><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div><div class="skill-label"><span>Git / npm</span><span>85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div><div class="skill-label"><span>Cloudinary</span><span>80%</span></div><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🧠</div><div class="skill-name">ML &amp; Data</div>
+      <div class="skill-bar-wrap">
+        <div><div class="skill-label"><span>Scikit-learn</span><span>82%</span></div><div class="skill-track"><div class="skill-fill" style="width:82%"></div></div></div>
+        <div><div class="skill-label"><span>XGBoost / RF</span><span>78%</span></div><div class="skill-track"><div class="skill-fill" style="width:78%"></div></div></div>
+        <div><div class="skill-label"><span>Pandas / NumPy</span><span>80%</span></div><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div></div>
+        <div><div class="skill-label"><span>Tableau</span><span>70%</span></div><div class="skill-track"><div class="skill-fill" style="width:70%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CODING ARENA ══════ -->
+<div class="section-head reveal">
+  <div class="section-tag">// CODING ARENA</div>
+  <h2 class="section-title">Problem <span>Solving</span></h2>
+  <div class="section-line"></div>
+</div>
+<section id="coding-stats">
+  <div class="stats-header-row reveal">
+    <div></div>
+    <button class="stats-config-btn" onclick="openStatsConfig()">⚙ Configure Profiles</button>
+  </div>
+  <div id="stats-empty" class="stats-empty-prompt reveal" onclick="openStatsConfig()" style="display:none;">
+    <div class="stats-empty-icon">🎯</div>
+    <div class="stats-empty-title">Add Your Profiles</div>
+    <div class="stats-empty-sub">Click to enter your LeetCode, GFG, Codeforces &amp; CodeChef usernames — stats fetch automatically</div>
+  </div>
+  <div class="coding-platforms reveal" id="coding-platforms"></div>
+  <div class="stats-total-bar reveal" id="stats-total" style="display:none;">
+    <div>
+      <div class="stats-total-val" id="total-solved">0+</div>
+      <div class="stats-total-lbl">Total Problems Solved</div>
+    </div>
+    <button class="stats-refresh-btn" onclick="fetchAllStats()">↻ Refresh Stats</button>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<div class="section-head reveal">
+  <div class="section-tag">// HALL OF GLORY</div>
+  <h2 class="section-title">Achieve<span>ments</span></h2>
+  <div class="section-line"></div>
+</div>
+<section id="achievements">
+  <div class="achieve-section-header reveal">
+    <div></div>
+    <button class="stats-config-btn" onclick="openAchieveModal('add')">+ Add Achievement</button>
+  </div>
+  <div class="achieve-grid" id="achieve-grid"></div>
+</section>
+
+<!-- PROJECTS -->
+<div class="section-head reveal">
+  <div class="section-tag">// ACTIVE MISSIONS</div>
+  <h2 class="section-title">My <span>Projects</span></h2>
+  <div class="section-line"></div>
+</div>
+<section id="projects">
+  <div class="projects-section-header reveal">
+    <div></div>
+    <button class="stats-config-btn" onclick="openProjectModal('add')">+ Add Mission</button>
+  </div>
+  <div class="projects-grid" id="projects-grid"></div>
+</section>
+
+<!-- EXPERIENCE -->
+<div class="section-head reveal">
+  <div class="section-tag">// MISSION LOG</div>
+  <h2 class="section-title">Experience <span>Timeline</span></h2>
+  <div class="section-line"></div>
+</div>
+<section id="experience">
+  <div class="timeline">
+    <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">2025 — PRESENT</div><div class="tl-role">M.Tech — Computer Science &amp; Engineering</div><div class="tl-org">Netaji Subhas University of Technology, New Delhi</div><div class="tl-desc">GATE-qualified admission. Specializing in algorithms, distributed systems and ML. CGPA: 6.75 (ongoing).</div></div>
+    <div class="tl-item reveal"><div class="tl-dot accent"></div><div class="tl-date">MAY 2023 — JUNE 2023</div><div class="tl-role">IT Intern</div><div class="tl-org">Small Arms Factory (Defence), Kanpur, UP</div><div class="tl-desc">Developed a workflow efficiency project aligned with organisational requirements. Hands-on exposure to IT operations and system integration in a defence manufacturing environment.</div></div>
+    <div class="tl-item reveal"><div class="tl-dot accent"></div><div class="tl-date">MAY 2022 — JULY 2022</div><div class="tl-role">Full Stack Developer Intern</div><div class="tl-org">Learn and Build · Remote</div><div class="tl-desc">Built three Django &amp; MySQL full-stack apps. Optimized DB queries, implemented authentication and role-based access control for secure multi-user operations.</div></div>
+    <div class="tl-item reveal"><div class="tl-dot gold"></div><div class="tl-date">2020 — 2024</div><div class="tl-role">B.Tech — Information Technology</div><div class="tl-org">University Institute of Engineering and Technology, Kanpur</div><div class="tl-desc">CGPA: 6.23. Core: DSA, DBMS, Computer Networks, Software Engineering. Solved 450+ competitive programming problems. GATE qualified 2023.</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="section-head reveal">
+  <div class="section-tag">// OPEN CHANNEL</div>
+  <h2 class="section-title">Contact <span>Signal</span></h2>
+  <div class="section-line"></div>
+</div>
+<section id="contact">
+  <div class="contact-card reveal">
+    <p>Currently pursuing M.Tech at NSUT Delhi and open to research collaborations, internships, and exciting engineering challenges. Transmit your signal — response speed: faster than light.</p>
+    <a href="mailto:sidsingh1679@gmail.com" class="btn btn-primary">⚡ sidsingh1679@gmail.com</a>
+    <div class="social-links">
+      <a href="https://github.com/" target="_blank" class="social-link">⬡ GitHub</a>
+      <a href="https://linkedin.com/in/" target="_blank" class="social-link">◈ LinkedIn</a>
+      <a href="https://leetcode.com/" target="_blank" class="social-link">◉ LeetCode</a>
+      <a href="#" class="social-link">◆ Resume</a>
+    </div>
+  </div>
+</section>
+<footer><span>⚡ SIDDHARTH SINGH · NSUT DELHI · BUILT IN THE COSMOS · POWERED BY CODE ⚡</span></footer>
+
+<!-- ══════════════════════════════════════
+     MODALS
+══════════════════════════════════════ -->
+
+<!-- Stats Config Modal -->
+<div class="modal-overlay" id="stats-modal">
+  <div class="modal">
+    <div class="modal-title">⚡ Configure Profiles</div>
+    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;">Enter your usernames. Stats are fetched via public APIs — no API key required for LeetCode &amp; Codeforces.</p>
+    <div class="form-group"><label class="form-label">💛 LeetCode Username</label><input class="form-input" id="s-lc" placeholder="e.g. siddharth_singh"></div>
+    <div class="form-group"><label class="form-label">💚 GeeksForGeeks Username</label><input class="form-input" id="s-gfg" placeholder="e.g. sidsingh1679"></div>
+    <div class="form-group"><label class="form-label">💙 Codeforces Handle</label><input class="form-input" id="s-cf" placeholder="e.g. sid_cf"></div>
+    <div class="form-group"><label class="form-label">🟤 CodeChef Username</label><input class="form-input" id="s-cc" placeholder="e.g. sid_chef"></div>
+    <div class="form-group"><label class="form-label">🐙 GitHub Username</label><input class="form-input" id="s-gh" placeholder="e.g. sidsingh1679"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('stats-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveProfiles()">Save &amp; Fetch</button>
+    </div>
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div class="modal-overlay" id="project-modal">
+  <div class="modal wide">
+    <div class="modal-title" id="proj-modal-title">⚡ New Mission</div>
+    <input type="hidden" id="proj-edit-id" value="">
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Project Name</label><input class="form-input" id="p-name" placeholder="e.g. Neural Classifier"></div>
+      <div class="form-group"><label class="form-label">Status</label>
+        <select class="form-input" id="p-status">
+          <option value="complete">Complete</option>
+          <option value="active">Active</option>
+          <option value="wip">In Progress</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Icon</label>
+      <div class="icon-picker" id="proj-icon-picker"></div>
+      <input type="hidden" id="p-icon" value="🧠">
+    </div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" id="p-desc" rows="3" placeholder="What does this project do?" style="resize:vertical"></textarea></div>
+    <div class="form-group"><label class="form-label">Tech Stack (comma separated)</label><input class="form-input" id="p-tags" placeholder="Python, React, Docker"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">GitHub URL</label><input class="form-input" id="p-github" type="url" placeholder="https://github.com/..."></div>
+      <div class="form-group"><label class="form-label">Live Demo URL</label><input class="form-input" id="p-demo" type="url" placeholder="https://..."></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('project-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveProject()">Launch Mission</button>
+    </div>
+  </div>
+</div>
+
+<!-- Achievement Modal -->
+<div class="modal-overlay" id="achieve-modal">
+  <div class="modal">
+    <div class="modal-title" id="ach-modal-title">⚡ New Achievement</div>
+    <input type="hidden" id="ach-edit-id" value="">
+    <div class="form-group"><label class="form-label">Icon</label>
+      <div class="icon-picker" id="ach-icon-picker"></div>
+      <input type="hidden" id="a-icon" value="🏆">
+    </div>
+    <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="a-title" placeholder="AIR 5 — GFG Contest"></div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-input" id="a-sub" rows="2" placeholder="Brief description..." style="resize:vertical"></textarea></div>
+    <div class="form-group"><label class="form-label">Badge / Date</label><input class="form-input" id="a-badge" placeholder="Feb 2024"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('achieve-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAchievement()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal confirm-modal">
+    <div class="modal-title">Confirm Delete</div>
+    <div class="confirm-msg" id="confirm-msg">Are you sure? This cannot be undone.</div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('confirm-modal')">Cancel</button>
+      <button class="btn btn-primary" id="confirm-ok" style="background:var(--accent);">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════════
+   STORAGE
+════════════════════════════════════ */
+const LS={
+  get:(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+};
+
+/* ════════════════════════════════════
+   DEFAULTS
+════════════════════════════════════ */
+const DEFAULT_PROJECTS=[
+  {id:1,icon:'🧠',name:'Software Effort Estimation ML',status:'complete',desc:'Predictive ML model for software development effort using Decision Tree, SVM, Random Forest, XGBoost. XGBoost stacking achieved 40% lower MAE, 30% lower RMSE, 65% higher R² vs traditional methods.',tags:['Python','XGBoost','Scikit-learn','Random Forest','SVM'],github:'#',demo:''},
+  {id:2,icon:'🎬',name:'YouTube + Twitter Backend',status:'complete',desc:'Scalable RESTful backend for video streaming & social media. JWT auth, Cloudinary upload pipeline (+30% efficiency), commenting system (+25% engagement), modular middleware (-25% bugs).',tags:['Node.js','Express.js','MongoDB','JWT','Cloudinary','Multer'],github:'#',demo:''},
+  {id:3,icon:'🌐',name:'Full-Stack Django Suite',status:'complete',desc:'Three full-stack apps — To-Do List, Comment Management System, Admission Portal. Built with Django & MySQL, featuring role-based access control and optimized query performance.',tags:['Django','MySQL','Python','HTML/CSS'],github:'#',demo:'#'}
+];
+
+const DEFAULT_ACHIEVEMENTS=[
+  {id:1,icon:'🏆',title:'AIR 5 — GFG Contest',sub:'All India Rank 5 out of 162 in GeeksForGeeks Hiring Contest (Problem Setter — JavaScript)',badge:'Feb 2024'},
+  {id:2,icon:'⚡',title:'GATE Qualified ×2',sub:'Graduate Aptitude Test in Engineering qualified in 2023 and 2025, securing M.Tech seat at NSUT',badge:'2023 & 2025'},
+  {id:3,icon:'💻',title:'450+ Problems',sub:'LeetCode 150+ (Max rating 1590) · GFG 160+ · across competitive programming platforms',badge:'Ongoing'},
+  {id:4,icon:'📊',title:'Deloitte Analytics',sub:'Completed Deloitte Australia Data Analytics Job Simulation — Tableau dashboard, Excel business insights',badge:'Feb 2025'},
+  {id:5,icon:'🤖',title:'NVIDIA Deep Learning',sub:'Certified in Fundamentals of Deep Learning — neural networks, GPU training, model optimization',badge:'Certified'}
+];
+
+let projects=LS.get('sid_projects',DEFAULT_PROJECTS);
+let achievements=LS.get('sid_achievements',DEFAULT_ACHIEVEMENTS);
+let profiles=LS.get('sid_profiles',{lc:'',gfg:'',cf:'',cc:'',gh:''});
+let statsCache=LS.get('sid_stats',{});
+
+const ICONS=['🧠','🎬','🌐','🗄️','⚙️','🔐','📊','🤖','🚀','🛸','⚡','💻','🌌','🔭','📡','🎯','🔥','💡','🏆','⭐'];
+const ACH_ICONS=['🏆','⚡','🤖','📊','🎖','🌟','🏅','💡','🔥','🎯','🧠','💻','🎓','📜','🥇','🌐','🛡','⚙️'];
+
+/* ════════════════════════════════════
+   CURSOR
+════════════════════════════════════ */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animCursor(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animCursor);}
+animCursor();
+function addCursorHover(el){el.addEventListener('mouseenter',()=>cursor.style.transform='translate(-50%,-50%) scale(2)');el.addEventListener('mouseleave',()=>cursor.style.transform='translate(-50%,-50%) scale(1)');}
+
+/* ════════════════════════════════════
+   STARS
+════════════════════════════════════ */
+const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');
+let W,H,stars=[],shooters=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+for(let i=0;i<280;i++)stars.push({x:Math.random()*1920,y:Math.random()*1080,r:Math.random()*1.4+0.3,a:Math.random(),da:(Math.random()-0.5)*0.007});
+function newShooter(){return{x:Math.random()*W*0.6,y:Math.random()*H*0.4,vx:5+Math.random()*8,vy:2+Math.random()*4,life:1};}
+setInterval(()=>{if(shooters.length<3)shooters.push(newShooter());},2800);
+function drawStars(){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{s.a+=s.da;if(s.a<0.1||s.a>1)s.da*=-1;s.a=Math.max(0.1,Math.min(1,s.a));const sx=(s.x/1920)*W,sy=(s.y/1080)*H;ctx.beginPath();ctx.arc(sx,sy,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,220,255,${s.a})`;ctx.fill();});
+  shooters.forEach((s,i)=>{ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*14,s.y-s.vy*14);const g=ctx.createLinearGradient(s.x-s.vx*14,s.y-s.vy*14,s.x,s.y);g.addColorStop(0,'transparent');g.addColorStop(1,`rgba(0,212,255,${s.life*0.9})`);ctx.strokeStyle=g;ctx.lineWidth=1.5;ctx.stroke();s.x+=s.vx;s.y+=s.vy;s.life-=0.018;if(s.life<=0||s.x>W||s.y>H)shooters.splice(i,1);});
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* ════════════════════════════════════
+   SCROLL REVEAL & SKILL BARS
+════════════════════════════════════ */
+const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+function observeReveals(){document.querySelectorAll('.reveal:not(.visible)').forEach(el=>revObs.observe(el));}
+const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.skill-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('animate'),150+i*80));});},{threshold:0.3});
+document.querySelectorAll('.skill-card').forEach(c=>barObs.observe(c));
+
+/* ════════════════════════════════════
+   HERO COUNTER
+════════════════════════════════════ */
+function countUp(el,target,dur=1400,suffix=''){let start=0;const step=target/(dur/16);const tick=()=>{start=Math.min(start+step,target);el.textContent=Math.floor(start)+suffix;if(start<target)requestAnimationFrame(tick);};tick();}
+const heroObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    countUp(document.getElementById('proj-count'),projects.length);
+    const totalSolved=Object.values(statsCache).reduce((a,s)=>a+(typeof s?.solved==='number'?s.solved:0),0);
+    countUp(document.getElementById('prob-count'),totalSolved||450,1800,'+');
+    heroObs.disconnect();
+  }
+},{threshold:0.5});
+heroObs.observe(document.getElementById('hero'));
+
+/* ════════════════════════════════════
+   TOAST
+════════════════════════════════════ */
+let toastTimer;
+function toast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className=`toast ${type} show`;
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+/* ════════════════════════════════════
+   MODAL HELPERS
+════════════════════════════════════ */
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+
+function confirm(msg,cb){
+  document.getElementById('confirm-msg').textContent=msg;
+  const btn=document.getElementById('confirm-ok');
+  btn.onclick=()=>{cb();closeModal('confirm-modal');};
+  openModal('confirm-modal');
+}
+
+/* ════════════════════════════════════
+   ICON PICKERS
+════════════════════════════════════ */
+function buildIconPicker(pickerId,hiddenId,icons,currentVal){
+  const div=document.getElementById(pickerId);
+  div.innerHTML='';
+  icons.forEach(ic=>{
+    const btn=document.createElement('button');
+    btn.type='button';btn.className='icon-opt'+(ic===currentVal?' selected':'');
+    btn.textContent=ic;
+    btn.onclick=()=>{
+      div.querySelectorAll('.icon-opt').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById(hiddenId).value=ic;
+    };
+    div.appendChild(btn);
+  });
+}
+
+/* ════════════════════════════════════
+   ══ PROJECTS CRUD ══
+════════════════════════════════════ */
+const STATUS_MAP={active:'status-active',complete:'status-complete',wip:'status-wip'};
+const STATUS_LBL={active:'Active',complete:'Complete',wip:'In Progress'};
+
+function renderProjects(){
+  const grid=document.getElementById('projects-grid');
+  grid.innerHTML='';
+  projects.forEach(p=>{
+    const tags=Array.isArray(p.tags)?p.tags:p.tags.split(',').map(t=>t.trim()).filter(Boolean);
+    const card=document.createElement('div');
+    card.className='project-card reveal';
+    card.innerHTML=`
+      <div class="project-header">
+        <div class="project-icon">${p.icon||'🛸'}</div>
+        <div class="project-status ${STATUS_MAP[p.status]||'status-complete'}">${STATUS_LBL[p.status]||'Complete'}</div>
+      </div>
+      <div class="project-body">
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc||''}</div>
+      </div>
+      <div class="project-tags">${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="project-links">
+        <div style="display:flex;gap:1rem;">
+          ${p.github?`<a class="project-link" href="${p.github}" target="_blank">⬡ GitHub</a>`:''}
+          ${p.demo?`<a class="project-link" href="${p.demo}" target="_blank">◈ Live Demo</a>`:''}
+        </div>
+        <div class="project-action-btns">
+          <button class="proj-edit-btn" onclick="openProjectModal('edit',${p.id})">✏ Edit</button>
+          <button class="proj-del-btn" onclick="deleteProject(${p.id})">🗑</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    addCursorHover(card);
+    revObs.observe(card);
+    setTimeout(()=>card.classList.add('visible'),80);
+  });
+  // update hero count
+  document.getElementById('proj-count').textContent=projects.length;
+}
+
+function openProjectModal(mode,id){
+  buildIconPicker('proj-icon-picker','p-icon',ICONS,'🧠');
+  if(mode==='add'){
+    document.getElementById('proj-modal-title').textContent='⚡ New Mission';
+    document.getElementById('proj-edit-id').value='';
+    ['p-name','p-desc','p-tags','p-github','p-demo'].forEach(i=>document.getElementById(i).value='');
+    document.getElementById('p-status').value='complete';
+    document.getElementById('p-icon').value='🧠';
+  } else {
+    const p=projects.find(x=>x.id===id);if(!p)return;
+    document.getElementById('proj-modal-title').textContent='✏ Edit Mission';
+    document.getElementById('proj-edit-id').value=id;
+    document.getElementById('p-name').value=p.name;
+    document.getElementById('p-desc').value=p.desc||'';
+    document.getElementById('p-tags').value=Array.isArray(p.tags)?p.tags.join(', '):p.tags;
+    document.getElementById('p-github').value=p.github||'';
+    document.getElementById('p-demo').value=p.demo||'';
+    document.getElementById('p-status').value=p.status||'complete';
+    document.getElementById('p-icon').value=p.icon||'🧠';
+    buildIconPicker('proj-icon-picker','p-icon',ICONS,p.icon||'🧠');
+  }
+  openModal('project-modal');
+}
+
+function saveProject(){
+  const name=document.getElementById('p-name').value.trim();
+  if(!name){toast('Project name is required!','error');return;}
+  const tags=document.getElementById('p-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const editId=document.getElementById('proj-edit-id').value;
+  const data={
+    name,icon:document.getElementById('p-icon').value||'🧠',
+    status:document.getElementById('p-status').value,
+    desc:document.getElementById('p-desc').value.trim(),
+    tags,github:document.getElementById('p-github').value.trim(),
+    demo:document.getElementById('p-demo').value.trim()
+  };
+  if(editId){
+    projects=projects.map(p=>p.id===parseInt(editId)?{...p,...data}:p);
+    toast('Mission updated! ✏','success');
+  } else {
+    data.id=Date.now();
+    projects.push(data);
+    toast('Mission launched! 🚀','success');
+  }
+  LS.set('sid_projects',projects);
+  closeModal('project-modal');
+  renderProjects();
+}
+
+function deleteProject(id){
+  confirm('Delete this project permanently?',()=>{
+    projects=projects.filter(p=>p.id!==id);
+    LS.set('sid_projects',projects);
+    renderProjects();
+    toast('Project removed.','error');
+  });
+}
+
+/* ════════════════════════════════════
+   ══ ACHIEVEMENTS CRUD ══
+════════════════════════════════════ */
+function renderAchievements(){
+  const grid=document.getElementById('achieve-grid');
+  grid.innerHTML='';
+  achievements.forEach(a=>{
+    const card=document.createElement('div');
+    card.className='achieve-card reveal';
+    card.innerHTML=`
+      <div class="achieve-edit-btns">
+        <button class="achieve-edit-btn" onclick="openAchieveModal('edit',${a.id})" title="Edit">✏</button>
+        <button class="achieve-del-btn" onclick="deleteAchievement(${a.id})" title="Delete">✕</button>
+      </div>
+      <div class="achieve-icon">${a.icon}</div>
+      <div class="achieve-title">${a.title}</div>
+      <div class="achieve-sub">${a.sub}</div>
+      <div class="achieve-badge">${a.badge}</div>`;
+    grid.appendChild(card);
+    addCursorHover(card);
+    revObs.observe(card);
+    setTimeout(()=>card.classList.add('visible'),80);
+  });
+  // Add button
+  const addBtn=document.createElement('button');
+  addBtn.className='add-achieve-btn reveal';
+  addBtn.innerHTML=`<div class="plus">+</div><span>Add Achievement</span>`;
+  addBtn.onclick=()=>openAchieveModal('add');
+  grid.appendChild(addBtn);
+  addCursorHover(addBtn);
+  revObs.observe(addBtn);
+  setTimeout(()=>addBtn.classList.add('visible'),120);
+}
+
+function openAchieveModal(mode,id){
+  buildIconPicker('ach-icon-picker','a-icon',ACH_ICONS,'🏆');
+  if(mode==='add'){
+    document.getElementById('ach-modal-title').textContent='⚡ New Achievement';
+    document.getElementById('ach-edit-id').value='';
+    ['a-title','a-sub','a-badge'].forEach(i=>document.getElementById(i).value='');
+    document.getElementById('a-icon').value='🏆';
+  } else {
+    const a=achievements.find(x=>x.id===id);if(!a)return;
+    document.getElementById('ach-modal-title').textContent='✏ Edit Achievement';
+    document.getElementById('ach-edit-id').value=id;
+    document.getElementById('a-title').value=a.title;
+    document.getElementById('a-sub').value=a.sub;
+    document.getElementById('a-badge').value=a.badge;
+    document.getElementById('a-icon').value=a.icon;
+    buildIconPicker('ach-icon-picker','a-icon',ACH_ICONS,a.icon);
+  }
+  openModal('achieve-modal');
+}
+
+function saveAchievement(){
+  const title=document.getElementById('a-title').value.trim();
+  if(!title){toast('Title is required!','error');return;}
+  const editId=document.getElementById('ach-edit-id').value;
+  const data={icon:document.getElementById('a-icon').value||'🏆',title,sub:document.getElementById('a-sub').value.trim(),badge:document.getElementById('a-badge').value.trim()};
+  if(editId){
+    achievements=achievements.map(a=>a.id===parseInt(editId)?{...a,...data}:a);
+    toast('Achievement updated! ✏','success');
+  } else {
+    data.id=Date.now();achievements.push(data);
+    toast('Achievement added! 🏆','success');
+  }
+  LS.set('sid_achievements',achievements);
+  closeModal('achieve-modal');
+  renderAchievements();
+}
+
+function deleteAchievement(id){
+  confirm('Delete this achievement?',()=>{
+    achievements=achievements.filter(a=>a.id!==id);
+    LS.set('sid_achievements',achievements);
+    renderAchievements();
+    toast('Achievement removed.','error');
+  });
+}
+
+/* ════════════════════════════════════
+   ══ CODING STATS ══
+════════════════════════════════════ */
+const PLATFORM_CFG=[
+  {key:'lc', cls:'lc', logo:'💛', nameClass:'lc', label:'LeetCode', url:u=>`https://leetcode.com/${u}`},
+  {key:'gfg',cls:'gfg',logo:'💚', nameClass:'gfg',label:'GeeksForGeeks',url:u=>`https://www.geeksforgeeks.org/user/${u}`},
+  {key:'cf', cls:'cf', logo:'💙', nameClass:'cf', label:'Codeforces',url:u=>`https://codeforces.com/profile/${u}`},
+  {key:'cc', cls:'cc', logo:'🟤', nameClass:'cc', label:'CodeChef',url:u=>`https://www.codechef.com/users/${u}`},
+  {key:'gh', cls:'gh', logo:'🐙', nameClass:'gh', label:'GitHub',url:u=>`https://github.com/${u}`},
+];
+
+function openStatsConfig(){
+  document.getElementById('s-lc').value=profiles.lc||'';
+  document.getElementById('s-gfg').value=profiles.gfg||'';
+  document.getElementById('s-cf').value=profiles.cf||'';
+  document.getElementById('s-cc').value=profiles.cc||'';
+  document.getElementById('s-gh').value=profiles.gh||'';
+  openModal('stats-modal');
+}
+
+function saveProfiles(){
+  profiles={lc:document.getElementById('s-lc').value.trim(),gfg:document.getElementById('s-gfg').value.trim(),cf:document.getElementById('s-cf').value.trim(),cc:document.getElementById('s-cc').value.trim(),gh:document.getElementById('s-gh').value.trim()};
+  LS.set('sid_profiles',profiles);
+  closeModal('stats-modal');
+  toast('Profiles saved! Fetching stats...','success');
+  renderStatsUI();
+  fetchAllStats();
+}
+
+function renderStatsUI(){
+  const hasAny=Object.values(profiles).some(v=>v);
+  document.getElementById('stats-empty').style.display=hasAny?'none':'block';
+  const container=document.getElementById('coding-platforms');
+  container.innerHTML='';
+  if(!hasAny)return;
+
+  PLATFORM_CFG.forEach(p=>{
+    if(!profiles[p.key])return;
+    const s=statsCache[p.key];
+    const card=document.createElement('a');
+    card.className=`platform-card ${p.cls} reveal`;
+    card.href=p.url(profiles[p.key]);
+    card.target='_blank';
+    card.rel='noreferrer';
+    card.id=`pc-${p.key}`;
+
+    let innerHtml=`
+      <div class="pc-top">
+        <div class="pc-brand">
+          <span class="pc-logo">${p.logo}</span>
+          <span class="pc-name ${p.nameClass}">${p.label}</span>
+        </div>
+        <div class="pc-spinner" id="sp-${p.key}"></div>
+      </div>`;
+
+    if(s){
+      innerHtml+=`<div class="pc-solved" id="sv-${p.key}">${s.solved??'—'}</div>`;
+      innerHtml+=`<div class="pc-solved-lbl">Problems Solved</div>`;
+      if(p.key==='lc'&&s.easy!=null){
+        innerHtml+=`<div class="pc-breakdown"><span class="pc-easy">Easy ${s.easy}</span><span class="pc-med">Med ${s.medium}</span><span class="pc-hard">Hard ${s.hard}</span></div>`;
+      }
+      if(p.key==='cf'&&s.rating){innerHtml+=`<div class="pc-rating">Rating: <strong>${s.rating}</strong>${s.rank?` · ${s.rank}`:''}</div>`;}
+      if(p.key==='cc'&&s.rating){innerHtml+=`<div class="pc-rating">Rating: <strong>${s.rating}</strong>${s.stars?` · ${s.stars}★`:''}</div>`;}
+      if(p.key==='gh'){innerHtml+=`<div class="pc-rating">Public Repos: <strong>${s.repos??'—'}</strong></div>`;}
+      if(s.err){innerHtml+=`<div class="pc-err">⚠ Live fetch failed — click to view profile</div>`;}
+    } else {
+      innerHtml+=`<div class="pc-placeholder">Click refresh to load stats</div>`;
+    }
+    innerHtml+=`<div class="pc-username">${profiles[p.key]}</div>`;
+    card.innerHTML=innerHtml;
+    container.appendChild(card);
+    addCursorHover(card);
+    revObs.observe(card);
+    setTimeout(()=>card.classList.add('visible'),80);
+  });
+
+  // Total bar
+  const total=Object.values(statsCache).reduce((a,s)=>a+(typeof s?.solved==='number'?s.solved:0),0);
+  const bar=document.getElementById('stats-total');
+  bar.style.display=Object.values(statsCache).length>0&&Object.values(profiles).some(v=>v)?'flex':'none';
+  document.getElementById('total-solved').textContent=total+'+';
+}
+
+/* ── API FETCHERS ── */
+async function fetchLeetCode(username){
+  try{
+    const res=await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+    if(!res.ok)throw new Error();
+    const d=await res.json();
+    if(d.status==='error')throw new Error();
+    return{solved:d.totalSolved,easy:d.easySolved,medium:d.mediumSolved,hard:d.hardSolved,rating:d.ranking};
+  }catch{
+    // fallback via allorigins proxy to leetcode graphql
+    try{
+      const body=JSON.stringify({query:`{matchedUser(username:"${username}"){submitStats{acSubmissionNum{difficulty count}}}}`});
+      const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://leetcode.com/graphql'),{method:'POST',headers:{'Content-Type':'application/json'},body});
+      const d=await r.json();
+      const ac=d?.data?.matchedUser?.submitStats?.acSubmissionNum||[];
+      return{solved:ac.find(x=>x.difficulty==='All')?.count||0,easy:ac.find(x=>x.difficulty==='Easy')?.count||0,medium:ac.find(x=>x.difficulty==='Medium')?.count||0,hard:ac.find(x=>x.difficulty==='Hard')?.count||0};
+    }catch{return{solved:'N/A',err:true};}
+  }
+}
+
+async function fetchGFG(username){
+  try{
+    const r=await fetch(`https://geeks-for-geeks-stats-api.vercel.app/?raw=Y&userName=${username}`);
+    const d=await r.json();if(d.error)throw new Error();
+    const info=d.info||{};
+    const solved=(info.School||0)+(info.Basic||0)+(info.Easy||0)+(info.Medium||0)+(info.Hard||0);
+    return{solved,score:info.codingScore};
+  }catch{return{solved:'N/A',err:true};}
+}
+
+async function fetchCodeforces(username){
+  try{
+    const [uRes,sRes]=await Promise.all([fetch(`https://codeforces.com/api/user.info?handles=${username}`),fetch(`https://codeforces.com/api/user.status?handle=${username}&from=1&count=10000`)]);
+    const u=await uRes.json(),s=await sRes.json();
+    if(u.status!=='OK')throw new Error();
+    const user=u.result[0];
+    const solved=s.status==='OK'?new Set(s.result.filter(x=>x.verdict==='OK').map(x=>x.problem.name)).size:0;
+    return{solved,rating:user.rating||'—',rank:user.rank};
+  }catch{return{solved:'N/A',err:true};}
+}
+
+async function fetchCodeChef(username){
+  try{
+    const r=await fetch(`https://codechef-api.vercel.app/handle/${username}`);
+    const d=await r.json();if(!d.success)throw new Error();
+    return{solved:d.currentRating||'—',rating:d.currentRating,stars:d.stars};
+  }catch{return{solved:'N/A',err:true};}
+}
+
+async function fetchGitHub(username){
+  try{
+    const r=await fetch(`https://api.github.com/users/${username}`);
+    const d=await r.json();
+    return{solved:d.public_repos||0,repos:d.public_repos,followers:d.followers};
+  }catch{return{solved:0,err:true};}
+}
+
+const FETCHERS={lc:fetchLeetCode,gfg:fetchGFG,cf:fetchCodeforces,cc:fetchCodeChef,gh:fetchGitHub};
+
+async function fetchSingle(key){
+  if(!profiles[key])return;
+  const sp=document.getElementById(`sp-${key}`);
+  if(sp)sp.classList.add('active');
+  const data=await FETCHERS[key](profiles[key]);
+  if(sp)sp.classList.remove('active');
+  statsCache[key]=data;
+  LS.set('sid_stats',statsCache);
+  // update card live
+  const sv=document.getElementById(`sv-${key}`);
+  if(sv)sv.textContent=data.solved;
+  renderStatsUI();
+}
+
+async function fetchAllStats(){
+  const keys=Object.keys(profiles).filter(k=>profiles[k]);
+  if(!keys.length)return;
+  renderStatsUI(); // show spinners
+  for(const k of keys)await fetchSingle(k);
+  // update hero counter
+  const total=Object.values(statsCache).reduce((a,s)=>a+(typeof s?.solved==='number'?s.solved:0),0);
+  if(total>0)document.getElementById('prob-count').textContent=total+'+';
+  toast('Stats updated! ↻','success');
+}
+
+/* ════════════════════════════════════
+   INIT
+════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProjects();
+  renderAchievements();
+  renderStatsUI();
+  observeReveals();
+  // auto-fetch if profiles exist and cache empty
+  const hasProfiles=Object.values(profiles).some(v=>v);
+  const hasCache=Object.keys(statsCache).length>0;
+  if(hasProfiles&&!hasCache)fetchAllStats();
+});
+</script>
+</body>
+</html>
